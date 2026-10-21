@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter & Co. | Bookstore</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #faf7f0;
+    color: #352b24;
+}
+
+header {
+    background: #473629;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+header h1 span {
+    color: #e9c99b;
+}
+
+.hero {
+    text-align: center;
+    padding: 75px 20px;
+    background: #eee2cf;
+}
+
+.hero h2 {
+    font-size: clamp(30px, 5vw, 46px);
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+    font-size: 17px;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    background: #473629;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 5px;
+}
+
+.search {
+    text-align: center;
+    padding: 30px 15px 10px;
+}
+
+.search input {
+    width: min(90%, 450px);
+    padding: 13px;
+    border: 1px solid #c9b9a5;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+h2.section-title {
+    text-align: center;
+    margin: 35px 0 25px;
+}
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 22px;
+    padding: 0 8% 50px;
+}
+
+.book {
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 15px #00000010;
+    transition: transform 0.2s;
+}
+
+.book:hover {
+    transform: translateY(-5px);
+}
+
+.book img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    background: #eee2cf;
+}
+
+.book h3 {
+    font-size: 18px;
+    margin: 15px 8px 8px;
+}
+
+.book p {
+    color: #846748;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button {
+    background: #473629;
+    color: white;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+button:hover {
+    background: #70553c;
+}
+
+.cart-section {
+    background: #eee2cf;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+#cart-items {
+    margin: 20px 0;
+    line-height: 2;
+}
+
+#total {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    background: #473629;
+    color: white;
+    padding: 25px;
+}
+
+@media(max-width: 480px) {
+    .books {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .book img {
+        height: 175px;
+    }
+
+    .book h3 {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Chapter <span>& Co.</span></h1>
+    <div>🛒 Cart: <span id="cart-count">0</span></div>
+</header>
+
+<section class="hero">
+    <h2>Every Book Opens a New World</h2>
+    <p>Discover stories, knowledge, and adventures on every page.</p>
+    <a href="#book-section">Explore Books</a>
+</section>
+
+<div class="search">
+    <input type="text" id="search" placeholder="🔍 Search for a book...">
+</div>
+
+<h2 class="section-title" id="book-section">Our Book Collection</h2>
+
+<section class="books" id="books">
+
+    <article class="book" data-name="the alchemist">
+        <img src="https://covers.openlibrary.org/b/title/The%20Alchemist-M.jpg" alt="The Alchemist">
+        <h3>The Alchemist</h3>
+        <p>Paulo Coelho</p>
+        <div class="price">₹299</div>
+        <button onclick="addToCart('The Alchemist',299)">Add to Cart</button>
+    </article>
+
+    <article class="book" data-name="atomic habits">
+        <img src="https://covers.openlibrary.org/b/title/Atomic%20Habits-M.jpg" alt="Atomic Habits">
+        <h3>Atomic Habits</h3>
+        <p>James Clear</p>
+        <div class="price">₹399</div>
+        <button onclick="addToCart('Atomic Habits',399)">Add to Cart</button>
+    </article>
+
+    <article class="book" data-name="rich dad poor dad">
+        <img src="https://covers.openlibrary.org/b/title/Rich%20Dad%20Poor%20Dad-M.jpg" alt="Rich Dad Poor Dad">
+        <h3>Rich Dad Poor Dad</h3>
+        <p>Robert Kiyosaki</p>
+        <div class="price">₹349</div>
+        <button onclick="addToCart('Rich Dad Poor Dad',349)">Add to Cart</button>
+    </article>
+
+    <article class="book" data-name="wings of fire">
+        <img src="https://covers.openlibrary.org/b/title/Wings%20of%20Fire-M.jpg" alt="Wings of Fire">
+        <h3>Wings of Fire</h3>
+        <p>A. P. J. Abdul Kalam</p>
+        <div class="price">₹279</div>
+        <button onclick="addToCart('Wings of Fire',279)">Add to Cart</button>
+    </article>
+
+    <article class="book" data-name="think and grow rich">
+        <img src="https://covers.openlibrary.org/b/title/Think%20and%20Grow%20Rich-M.jpg" alt="Think and Grow Rich">
+        <h3>Think and Grow Rich</h3>
+        <p>Napoleon Hill</p>
+        <div class="price">₹319</div>
+        <button onclick="addToCart('Think and Grow Rich',319)">Add to Cart</button>
+    </article>
+
+    <article class="book" data-name="the power of your subconscious mind">
+        <img src="https://covers.openlibrary.org/b/title/The%20Power%20of%20Your%20Subconscious%20Mind-M.jpg" alt="The Power of Your Subconscious Mind">
+        <h3>The Power of Your Subconscious Mind</h3>
+        <p>Joseph Murphy</p>
+        <div class="price">₹249</div>
+        <button onclick="addToCart('The Power of Your Subconscious Mind',249)">Add to Cart</button>
+    </article>
+
+</section>
+
+<section class="cart-section">
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items">Your cart is empty.</div>
+    <p id="total">Total: ₹0</p>
+    <button onclick="clearCart()">Clear Cart</button>
+    <button onclick="checkout()">Place Demo Order</button>
+</section>
+
+<footer>
+    <p>© 2026 Chapter & Co. | Bookstore Demo</p>
+    <p style="margin-top:8px">Read More. Imagine More. Discover More.</p>
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    updateCart();
+}
+
+function updateCart() {
+    const items = document.getElementById("cart-items");
+    document.getElementById("cart-count").textContent = cart.length;
+    items.innerHTML = "";
+
+    if (cart.length === 0) {
+        items.textContent = "Your cart is empty.";
+    } else {
+        cart.forEach((item, index) => {
+            const row = document.createElement("p");
+            row.textContent = `${index + 1}. ${item.name} - ₹${item.price}`;
+            items.appendChild(row);
+        });
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    document.getElementById("total").textContent = "Total: ₹" + total;
+}
+
+function clearCart() {
+    cart = [];
+    updateCart();
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Please add a book to your cart first!");
+        return;
+    }
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+    alert(
+        "Demo order placed successfully!\n" +
+        "Books: " + cart.length +
+        "\nTotal: ₹" + total +
+        "\nThis is a demo. No actual purchase was made."
+    );
+
+    clearCart();
+}
+
+document.getElementById("search").addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+
+    document.querySelectorAll(".book").forEach(book => {
+        book.style.display = book.dataset.name.includes(query) ? "" : "none";
+    });
+});
+</script>
+
+</body>
+</html>
